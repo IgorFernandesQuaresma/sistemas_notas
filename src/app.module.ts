@@ -5,8 +5,9 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { TarefaModule } from './tarefa/tarefa.module';
 import { Tarefa } from './tarefa/entities/tarefa.entity';
 import { AuthModule } from './auth/auth.module';
-import { Usuario } from './auth/usuario/entities/usuario.entity';
-import { UsuarioModule } from './auth/usuario/usuario.module';
+import { Usuario } from './usuario/entities/usuario.entity';
+import { UsuarioModule } from './usuario/usuario.module';
+
 
 @Module({
   imports: [

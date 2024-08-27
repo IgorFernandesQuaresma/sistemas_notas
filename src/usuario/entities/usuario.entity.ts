@@ -1,6 +1,7 @@
 import { IsEmail, IsNotEmpty, Matches, MinLength } from "class-validator"
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm"
-import { Tarefa } from "../../../tarefa/entities/tarefa.entity"
+import { Tarefa } from "../../tarefa/entities/tarefa.entity"
+
 
 
 @Entity({name: "tb_usuarios"})

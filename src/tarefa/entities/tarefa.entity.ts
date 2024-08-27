@@ -1,6 +1,6 @@
 import { IsIn, IsNotEmpty } from "class-validator";
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm"
-import { Usuario } from "../../auth/usuario/entities/usuario.entity";
+import { Usuario } from "../../usuario/entities/usuario.entity";
 
 
 @Entity({name: "tb_tarefas"})
