@@ -16,33 +16,46 @@ export class UsuarioService{
     async findAll(): Promise<Usuario[]> {
         return await this.usuarioRepository.find({
             relations: {
-                agendamento: true,
+                tarefa: true,
                 
             }
         });   
     }
 
     async create(usuario: Usuario): Promise<Usuario>{
+
+            let existeUsuario = await this.usuarioRepository.findOne({
+                where: {
+                    usuario: usuario.usuario, 
+                },
+            });
+
+            if (existeUsuario) {
+                throw new HttpException('Usuário já existe!', HttpStatus.CONFLICT);
+            }
+
+
+
         return await this.usuarioRepository.save(usuario);
     }
 
     async findById(id: number): Promise<Usuario> {
 
-        let servico = await this.usuarioRepository.findOne({
+        let usuario = await this.usuarioRepository.findOne({
             where: {
                 id
             },
             relations: {
-                agendamento: true,
+                tarefa: true,
         
             }
             
         });
 
-        if (!servico)
+        if (!usuario)
             throw new HttpException('Usuario não encontrado!', HttpStatus.NOT_FOUND);
 
-        return servico;
+        return usuario;
     }
 
     async findByUsuario(usuario: string): Promise<Usuario[]> {
@@ -51,7 +64,7 @@ export class UsuarioService{
                 usuario: ILike(`%${usuario}%`)
             },
             relations: {
-                agendamento: true
+                tarefa: true
     
             }
             
@@ -61,9 +74,9 @@ export class UsuarioService{
 
     async update(usuario: Usuario): Promise<Usuario> {
         
-        let usuarioServico = await this.findById(usuario.id);
+        let usuarioTarefa = await this.findById(usuario.id);
 
-        if (!usuarioServico || !usuario.id)
+        if (!usuarioTarefa || !usuario.id)
             throw new HttpException('Usuario não encontrado!', HttpStatus.NOT_FOUND);
         
         return await this.usuarioRepository.save(usuario);
@@ -72,9 +85,9 @@ export class UsuarioService{
     
     async delete(id: number): Promise<DeleteResult> {
         
-        let usuarioServico = await this.findById(id);
+        let usuarioTarefa = await this.findById(id);
 
-        if (!usuarioServico)
+        if (!usuarioTarefa)
             throw new HttpException('Usuario não encontrado!', HttpStatus.NOT_FOUND);
 
         return await this.usuarioRepository.delete(id);

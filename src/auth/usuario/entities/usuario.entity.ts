@@ -1,7 +1,6 @@
 import { IsEmail, IsNotEmpty, Matches, MinLength } from "class-validator"
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm"
-import { Agendamento } from "../../../agendamento/entities/agendamento.entity"
-import { Servico } from "../../../servico/entities/servico.entity"
+import { Tarefa } from "../../../tarefa/entities/tarefa.entity"
 
 
 @Entity({name: "tb_usuarios"})
@@ -31,10 +30,7 @@ export class Usuario {
     senha: string;
 
 
-    @OneToMany(() => Agendamento, (agendamento) => agendamento.usuario)
-    agendamento: Agendamento[]
-
-    @OneToMany(() => Servico, (servico) => servico.usuario)
-    servico: Servico[]
+    @OneToMany(() => Tarefa, (tarefa) => tarefa.usuario)
+    tarefa: Tarefa[]
     
 }
